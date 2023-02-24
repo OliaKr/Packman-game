@@ -1,9 +1,11 @@
 'use strict'
-const WALL = '✖️'
-const FOOD = '▫️'
+const WALL = '<img src="img/wall.png" />';
+const FOOD = '🥨'
 const EMPTY = ' '
 const SUPER_FOOD = '🍉'
 const CHERRY = '🍒'
+
+const winner = new Audio("sounds/winner.mp3");
 
 var SIZE = 10
 var foodCount
@@ -61,6 +63,7 @@ function updateScore(diff) {
     }
     document.querySelector('h2 span').innerText = gGame.score
     if (gScore === foodCount) {
+        winner.play();
         gameOver(true)
     }
 }

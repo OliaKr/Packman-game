@@ -10,6 +10,10 @@ body {
  
 }
 
+tr{
+  line-height:0;
+}
+
 .cell {
   width: 40px;
   height: 40px;
@@ -19,8 +23,8 @@ body {
 }
 
 img {
-  height: 20px;
-  width: 20px;
+  height: 40px;
+  width: 40px;
 }
 
 .formLine {

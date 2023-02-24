@@ -1,7 +1,8 @@
 'use strict'
 
 var PACMAN = '<img src="img/pac-left.png" />';
-// var pacman = '😷'
+const success = new Audio("sounds/success.mp3");
+const lose = new Audio("sounds/lose.mp3");
 
 var gPacman
 
@@ -32,14 +33,17 @@ function movePacman(ev) {
     } else if (nextCell === GHOST) {
         if (!gPacman.isSuper) {
             gameOver(false);
+            lose.play()
             renderCell(gPacman.location, EMPTY)
             return;
         } else {
             killGhost(nextLocation)
         }
     } else if (nextCell === SUPER_FOOD) {
-        if(gPacman.isSuper) return
+        success.play()
+        if (gPacman.isSuper) return
         gPacman.isSuper = true
+        success.play()
         renderGhosts()
         setTimeout(function () {
             gPacman.isSuper = false
@@ -90,7 +94,7 @@ function getNextLocation(eventKeyboard) {
             nextLocation.i++
             break;
         case 'ArrowLeft':
-            PACMAN ='<img src="img/pac-left.png" />';
+            PACMAN = '<img src="img/pac-left.png" />';
             nextLocation.j--
             break;
     }
@@ -111,7 +115,7 @@ function killGhost(location) {
                 gGhosts[i].currCellContent = EMPTY
                 updateScore(1)
             }
-             var killedGhost = gGhosts.splice(i, 1)
+            var killedGhost = gGhosts.splice(i, 1)
             renderCell(location, EMPTY)
             gKilledGhosts.push(killedGhost[0])
         }
